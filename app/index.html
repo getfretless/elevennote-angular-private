@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body>
+<body ng-controller="NotesCtrl">
   <!--ul class="menu">
     <li><a href="#/view1">view1</a></li>
     <li><a href="#/view2">view2</a></li>
@@ -38,7 +38,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-4">
-          <nav id="sidebar" ng-controller="NotesCtrl">
+          <nav id="sidebar">
             <div class="well">
               <ul>
                 <li ng-repeat="note in notes">
