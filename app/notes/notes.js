@@ -12,20 +12,32 @@ noteApp.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-noteApp.controller('NotesCtrl', function NotesCtrl($scope, $http, $timeout) {
-  $scope.notes = [];
-  $scope.$watch('notes', function(){
-    console.log('notes updated');
-  });
+noteApp.service('NotesBackend', function NotesBackend($http) {
+  var notes = [];
 
-  $http.get(elevennoteBasePath+'notes?api_key='+apiKey)
+  this.getNotes = function() {
+    return notes;
+  }
+
+  this.fetchNotes = function() {
+    $http.get(elevennoteBasePath+'notes?api_key='+apiKey)
     .success(function(notes_data) {
-      $scope.notes = notes_data;
+      notes = notes_data;
     });
+  }
+});
 
-  $scope.body_html = 'This is the body';
+noteApp.controller('NotesCtrl', function NotesCtrl($scope, $http, $timeout, NotesBackend) {
+  NotesBackend.fetchNotes();
+
+  $scope.notes = function() {
+    return NotesBackend.getNotes();
+  }
+
+  $scope.bodyHtml = 'This is the body';
   $scope.submit = function() {
     console.log('submitting');
+    var new_data;
     $http({
       method: 'POST',
       url: elevennoteBasePath + 'notes',
@@ -37,9 +49,7 @@ noteApp.controller('NotesCtrl', function NotesCtrl($scope, $http, $timeout) {
         }
       }})
       .success(function(note_data){
-        console.log(note_data);
-        console.log($scope.notes);
-        $scope.notes = $scope.notes.concat(note_data);
+        NotesBackend.fetchNotes();
       });
   }
 });
