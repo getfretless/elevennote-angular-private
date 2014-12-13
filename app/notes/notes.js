@@ -55,7 +55,7 @@ noteApp.controller('NotesCtrl', function NotesCtrl($scope, $http, $timeout, Note
       body_html: 'THIS IS AWESOME'
     };
     NotesBackend.postNote(note, function(){
-      $scope.notes();
+      NotesBackend.fetchNotes();
     });
   };
 });
