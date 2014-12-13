@@ -17,14 +17,27 @@ noteApp.service('NotesBackend', function NotesBackend($http) {
 
   this.getNotes = function() {
     return notes;
-  }
+  };
 
   this.fetchNotes = function() {
     $http.get(elevennoteBasePath+'notes?api_key='+apiKey)
     .success(function(notes_data) {
       notes = notes_data;
     });
-  }
+  };
+
+  this.postNote = function(note_data, callback) {
+    $http({
+      method: 'POST',
+      url: elevennoteBasePath + 'notes',
+      data: {
+        api_key: apiKey,
+        note: note_data
+      }})
+    .success(function(note_data){
+      callback();
+    });
+  };
 });
 
 noteApp.controller('NotesCtrl', function NotesCtrl($scope, $http, $timeout, NotesBackend) {
@@ -32,24 +45,17 @@ noteApp.controller('NotesCtrl', function NotesCtrl($scope, $http, $timeout, Note
 
   $scope.notes = function() {
     return NotesBackend.getNotes();
-  }
+  };
 
   $scope.bodyHtml = 'This is the body';
+
   $scope.submit = function() {
-    console.log('submitting');
-    var new_data;
-    $http({
-      method: 'POST',
-      url: elevennoteBasePath + 'notes',
-      data: {
-        api_key: apiKey,
-        note: {
-          title: 'Title',
-          body_html: 'Body HTML'
-        }
-      }})
-      .success(function(note_data){
-        NotesBackend.fetchNotes();
-      });
-  }
+    var note = {
+      title: 'SuperCool Note',
+      body_html: 'THIS IS AWESOME'
+    };
+    NotesBackend.postNote(note, function(){
+      $scope.notes();
+    });
+  };
 });
