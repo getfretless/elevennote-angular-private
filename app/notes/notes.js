@@ -8,7 +8,7 @@ var noteApp = angular.module('myApp.notes', ['ngRoute']);
 noteApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/notes', {
     templateUrl: 'notes/index.html',
-    controller: 'NotesCtrl'
+    controller: 'NotesController'
   });
 }]);
 
@@ -40,7 +40,7 @@ noteApp.service('NotesBackend', function NotesBackend($http) {
   };
 });
 
-noteApp.controller('NotesCtrl', function NotesCtrl($scope, $http, $timeout, NotesBackend) {
+noteApp.controller('NotesController', function NotesController($scope, $http, $timeout, NotesBackend) {
   NotesBackend.fetchNotes();
 
   $scope.notes = function() {
