@@ -21,20 +21,17 @@ noteApp.service('NotesBackend', function NotesBackend($http) {
 
   this.fetchNotes = function() {
     $http.get(elevennoteBasePath+'notes?api_key='+apiKey)
-    .success(function(notes_data) {
-      notes = notes_data;
+    .success(function(notesData) {
+      notes = notesData;
     });
   };
 
-  this.postNote = function(note_data, callback) {
-    $http({
-      method: 'POST',
-      url: elevennoteBasePath + 'notes',
-      data: {
-        api_key: apiKey,
-        note: note_data
-      }})
-    .success(function(note_data){
+  this.postNote = function(noteData, callback) {
+    $http.post(elevennoteBasePath + 'notes', {
+      api_key: apiKey,
+      note: noteData
+    })
+    .success(function(newNoteData){
       callback();
     });
   };
