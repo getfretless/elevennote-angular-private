@@ -37,7 +37,7 @@ noteApp.service('NotesBackend', function NotesBackend($http) {
   };
 });
 
-noteApp.controller('NotesController', function NotesController($scope, $http, $timeout, NotesBackend) {
+noteApp.controller('NotesController', function NotesController($scope, $http, NotesBackend) {
   NotesBackend.fetchNotes();
 
   $scope.notes = function() {
