@@ -41,7 +41,7 @@
           <nav id="sidebar">
             <div class="well">
               <ul>
-                <li id="note_{{ note.id }}" ng-repeat="note in notes() | limitTo:8">
+                <li id="note_{{ note.id }}" ng-repeat="note in notes()">
                   {{ note.title }}
                 </li>
               </ul>

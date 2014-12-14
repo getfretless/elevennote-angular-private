@@ -40,16 +40,13 @@ noteApp.service('NotesBackend', function NotesBackend($http) {
 
 noteApp.controller('NotesController', function NotesController($scope, $http, NotesBackend) {
   NotesBackend.fetchNotes();
+  $scope.note = {};
 
   $scope.notes = function() {
     return NotesBackend.getNotes();
   };
 
   $scope.submit = function() {
-    var note = {
-      title: 'SuperCool Note',
-      body_html: 'THIS IS AWESOME'
-    };
-    NotesBackend.postNote(note);
+    NotesBackend.postNote($scope.note);
   };
 });
