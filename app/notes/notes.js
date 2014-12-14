@@ -51,6 +51,14 @@ noteApp.service('NotesBackend', function NotesBackend($http) {
 noteApp.controller('NotesController', function NotesController($scope, $http, $filter, NotesBackend) {
   NotesBackend.fetchNotes();
 
+  $scope.buttonText = function(note) {
+    if (note && note.id) {
+      return 'Update Note';
+    } else {
+      return 'Create Note';
+    }
+  }
+
   $scope.notes = function() {
     return NotesBackend.getNotes();
   };
