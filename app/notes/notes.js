@@ -37,9 +37,8 @@ noteApp.service('NotesBackend', function NotesBackend($http) {
   };
 });
 
-noteApp.controller('NotesController', function NotesController($scope, $http, NotesBackend) {
+noteApp.controller('NotesController', function NotesController($scope, $http, $filter, NotesBackend) {
   NotesBackend.fetchNotes();
-  $scope.note = {};
 
   $scope.notes = function() {
     return NotesBackend.getNotes();
@@ -47,5 +46,13 @@ noteApp.controller('NotesController', function NotesController($scope, $http, No
 
   $scope.submit = function() {
     NotesBackend.postNote($scope.note);
+  };
+
+  $scope.findNote = function(noteID) {
+    return $filter('filter')($scope.notes(), { id: noteID }, true)[0];
+  };
+
+  $scope.loadNote = function(noteID) {
+    $scope.note = this.findNote(noteID);
   };
 });

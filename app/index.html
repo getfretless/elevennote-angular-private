@@ -41,7 +41,7 @@
           <nav id="sidebar">
             <div class="well">
               <ul id="notes" ng-show="notes().length > 0">
-                <li id="note_{{ note.id }}" ng-repeat="note in notes()">
+                <li ng-repeat="note in notes()" ng-click="loadNote(note.id)">
                   <div class="note-title">{{ note.title }}</div>
                   <div class="note-body">{{ note.body_text }}</div>
                 </li>
