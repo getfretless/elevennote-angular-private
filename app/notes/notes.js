@@ -35,6 +35,17 @@ noteApp.service('NotesBackend', function NotesBackend($http) {
       _this.fetchNotes();
     });
   };
+
+  this.updateNote = function(note) {
+    var _this = this;
+    $http.put(elevennoteBasePath + 'notes/' + note.id, {
+      api_key: apiKey,
+      note: note
+    }).success(function(newNoteData){
+      console.log('success');
+      _this.fetchNotes();
+    });
+  };
 });
 
 noteApp.controller('NotesController', function NotesController($scope, $http, $filter, NotesBackend) {
@@ -45,7 +56,11 @@ noteApp.controller('NotesController', function NotesController($scope, $http, $f
   };
 
   $scope.submit = function() {
-    NotesBackend.postNote($scope.note);
+    if ($scope.note.id) {
+      NotesBackend.updateNote($scope.note);
+    } else {
+      NotesBackend.postNote($scope.note);
+    }
   };
 
   $scope.findNote = function(noteID) {
