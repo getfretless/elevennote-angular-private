@@ -47,8 +47,6 @@ noteApp.controller('NotesController', function NotesController($scope, $http, $t
     return NotesBackend.getNotes();
   };
 
-  $scope.bodyHtml = 'This is the body';
-
   $scope.submit = function() {
     var note = {
       title: 'SuperCool Note',
