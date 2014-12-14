@@ -26,13 +26,14 @@ noteApp.service('NotesBackend', function NotesBackend($http) {
     });
   };
 
-  this.postNote = function(noteData, callback) {
+  this.postNote = function(noteData) {
+    var _this = this;
     $http.post(elevennoteBasePath + 'notes', {
       api_key: apiKey,
       note: noteData
     })
     .success(function(newNoteData){
-      callback();
+      _this.fetchNotes();
     });
   };
 });
@@ -49,8 +50,6 @@ noteApp.controller('NotesController', function NotesController($scope, $http, No
       title: 'SuperCool Note',
       body_html: 'THIS IS AWESOME'
     };
-    NotesBackend.postNote(note, function(){
-      NotesBackend.fetchNotes();
-    });
+    NotesBackend.postNote(note);
   };
 });
