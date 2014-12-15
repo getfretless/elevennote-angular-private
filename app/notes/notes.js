@@ -78,4 +78,9 @@ noteApp.controller('NotesController', function NotesController($scope, $http, $f
   $scope.loadNote = function(noteID) {
     $scope.note = this.findNote(noteID);
   };
+
+  $scope.clearNote = function() {
+    $scope.note = {};
+    document.getElementById('note_title').focus();
+  };
 });

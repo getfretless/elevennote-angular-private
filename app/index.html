@@ -39,14 +39,16 @@
       <div class="row">
         <div class="col-xs-4">
           <nav id="sidebar">
-            <div class="well">
-              <ul id="notes" ng-show="notes().length > 0">
-                <li ng-repeat="note in notes()" ng-click="loadNote(note.id)">
-                  <div class="note-title">{{ note.title }}</div>
-                  <div class="note-body">{{ note.body_text }}</div>
-                </li>
-              </ul>
-            </div>
+            <button class="new-note btn btn-default" ng-click="clearNote()">
+              <i class="fa fa-plus-circle"></i>
+              New Note
+            </button>
+            <ul id="notes" ng-show="notes().length > 0">
+              <li ng-repeat="note in notes()" ng-click="loadNote(note.id)">
+                <div class="note-title">{{ note.title }}</div>
+                <div class="note-body">{{ note.body_text }}</div>
+              </li>
+            </ul>
           </nav>
         </div>
         <div class="col-xs-8">
