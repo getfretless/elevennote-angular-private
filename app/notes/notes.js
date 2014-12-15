@@ -45,6 +45,14 @@ noteApp.service('NotesBackend', function NotesBackend($http) {
       _this.fetchNotes();
     });
   };
+
+  this.deleteNote = function(note) {
+    var _this = this;
+    $http.delete(elevennoteBasePath + 'notes/' + note.id + '?api_key=' + apiKey)
+    .success(function(newNoteData){
+      _this.fetchNotes();
+    });
+  };
 });
 
 noteApp.controller('NotesController', function NotesController($scope, $http, $filter, NotesBackend) {
@@ -81,5 +89,10 @@ noteApp.controller('NotesController', function NotesController($scope, $http, $f
   $scope.clearNote = function() {
     $scope.note = {};
     document.getElementById('note_title').focus();
+  };
+
+  $scope.deleteNote = function() {
+    NotesBackend.deleteNote($scope.note);
+    $scope.note = {};
   };
 });
