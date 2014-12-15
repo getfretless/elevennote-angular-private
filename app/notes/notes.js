@@ -42,7 +42,6 @@ noteApp.service('NotesBackend', function NotesBackend($http) {
       api_key: apiKey,
       note: note
     }).success(function(newNoteData){
-      console.log('success');
       _this.fetchNotes();
     });
   };
