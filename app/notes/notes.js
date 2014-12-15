@@ -1,6 +1,6 @@
 'use strict';
 
-var noteApp = angular.module('myApp.notes', ['ngRoute']);
+var noteApp = angular.module('myApp.notes', ['ngRoute', 'textAngular']);
 
 noteApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/notes', {
