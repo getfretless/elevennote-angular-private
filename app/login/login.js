@@ -9,6 +9,9 @@ angular.module('myApp.login', ['ngRoute'])
   });
 }])
 
-.controller('LoginController', [function() {
-
-}]);
+.controller('LoginController', function LoginController($scope, $location) {
+  $scope.submit = function() {
+    // do something
+    console.log('dosomething')
+  };
+});
