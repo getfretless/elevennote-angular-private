@@ -93,6 +93,6 @@ noteApp.controller('NotesController', function NotesController($scope, $http, $f
 
   $scope.deleteNote = function() {
     NotesBackend.deleteNote($scope.note);
-    $scope.note = {};
+    this.clearNote();
   };
 });
